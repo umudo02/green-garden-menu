@@ -1,40 +1,29 @@
 import { Link } from "react-router-dom";
-import { 
-  Utensils, 
-  Coffee, 
-  GlassWater, 
-  Cake, 
-  Wind, 
-  IceCreamBowl, 
-  Cookie,
-  ChefHat
-} from "lucide-react";
+import { Utensils, Coffee, GlassWater, Cake, Wind, IceCreamBowl, Cookie, ChefHat } from "lucide-react";
 import type { Category } from "@/types/menu";
-
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+const iconMap: Record<string, React.ComponentType<{
+  className?: string;
+}>> = {
   utensils: Utensils,
   coffee: Coffee,
   "glass-water": GlassWater,
   cake: Cake,
   wind: Wind,
   "ice-cream-bowl": IceCreamBowl,
-  cookie: Cookie,
+  cookie: Cookie
 };
-
 interface CategoryCardProps {
   category: Category;
   index: number;
 }
-
-export function CategoryCard({ category, index }: CategoryCardProps) {
+export function CategoryCard({
+  category,
+  index
+}: CategoryCardProps) {
   const IconComponent = iconMap[category.icon || ""] || ChefHat;
-
-  return (
-    <Link
-      to={`/category/${category.slug}`}
-      className="group block"
-      style={{ animationDelay: `${index * 100}ms` }}
-    >
+  return <Link to={`/category/${category.slug}`} className="group block" style={{
+    animationDelay: `${index * 100}ms`
+  }}>
       <div className="relative overflow-hidden rounded-2xl bg-card p-6 shadow-garden transition-all duration-300 hover:shadow-garden-lg hover:-translate-y-1 animate-slide-up">
         {/* Decorative gradient background */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-garden-mint/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -47,7 +36,7 @@ export function CategoryCard({ category, index }: CategoryCardProps) {
           
           {/* Text content */}
           <div className="flex-1">
-            <h3 className="font-display text-xl font-semibold text-foreground transition-colors group-hover:text-primary">
+            <h3 className="font-display text-xl text-foreground transition-colors group-hover:text-primary font-bold">
               {category.name}
             </h3>
             <p className="mt-1 text-sm text-muted-foreground">
@@ -57,22 +46,11 @@ export function CategoryCard({ category, index }: CategoryCardProps) {
           
           {/* Arrow indicator */}
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary text-muted-foreground transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
-            <svg
-              className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-0.5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
+            <svg className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </div>
         </div>
       </div>
-    </Link>
-  );
+    </Link>;
 }
